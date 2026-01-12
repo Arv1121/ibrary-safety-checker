@@ -1,0 +1,16 @@
+/* static/styles.css */
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; background: #0f172a; color: #e2e8f0; }
+.container { max-width: 800px; margin: 40px auto; padding: 24px; background: #111827; border-radius: 12px; }
+h1, h2, h3 { color: #f8fafc; }
+.search-form label { display:block; margin-top:12px; }
+.search-form input, .search-form select { width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid #334155; background:#0b1220; color:#e2e8f0; }
+button { margin-top:16px; padding:10px 16px; background:#2563eb; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+button:hover { background:#1d4ed8; }
+.card { margin-top:20px; padding:16px; background:#0b1220; border:1px solid #334155; border-radius:10px; }
+.verdict { padding:10px; border-radius:8px; margin:10px 0; display:inline-block; }
+.verdict.safe { background:#064e3b; }
+.verdict.needs-review { background:#92400e; }
+.verdict.unsafe { background:#7f1d1d; }
+.reasons li { margin:6px 0; }
+.refs a { margin-right:8px; color:#93c5fd; }
+a { color:#93c5fd; }
