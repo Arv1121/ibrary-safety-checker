@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Library Safety Checker</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="brand">Library Safety Checker</h1>
+      <p class="tag">Quickly assess open-source packages for license, maintenance, and vulnerabilities</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero card">
+      <h2>Check a package</h2>
+      <p class="lead">Enter a package name, select the ecosystem, and optionally a version. Results include a simple verdict and supporting evidence.</p>
+      <form action="/search" method="post" class="search-form" id="searchForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="package">Package</label>
+            <input id="package" type="text" name="package" placeholder="e.g., requests" required>
+          </div>
+          <div class="field">
+            <label for="ecosystem">Ecosystem</label>
+            <select id="ecosystem" name="ecosystem">
+              <option>PyPI</option>
+              <option>npm</option>
+              <option>Maven</option>
+              <option>Go</option>
+              <option>RubyGems</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="version">Version (optional)</label>
+            <input id="version" type="text" name="version" placeholder="e.g., 2.31.0">
+          </div>
+        </div>
+        <div class="actions">
+          <button type="submit" id="submitBtn" class="btn-primary">Check safety</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="notes">
+      <h3>About</h3>
+      <p>This tool queries public sources (PyPI & OSV) and returns a concise assessment. Use the results as guidance — do your own risk assessment before production use.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">© Library Safety Checker</div>
+  </footer>
+
+  <script>
+    document.getElementById('searchForm')?.addEventListener('submit', function (e) {
+      var btn = document.getElementById('submitBtn');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Checking...';
+      }
+    });
+  </script>
+</body>
+</html>

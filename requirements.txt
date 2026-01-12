@@ -1,0 +1,5 @@
+Flask>=2.2
+requests>=2.31
+# Development / test dependencies
+pytest>=7.0
+pytest-mock>=4.0

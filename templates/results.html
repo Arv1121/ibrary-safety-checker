@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Results - Library Safety Checker</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="brand">Library Safety Checker</h1>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="result-card card">
+      {% if errors %}
+        <div class="section">
+          <div style="background:#fff4f4;padding:.8rem;border-radius:8px;border:1px solid #ffecec;color:#9f3a38">
+            <strong>Notice:</strong>
+            <ul style="margin:.5rem 0 0 1.25rem">
+              {% for e in errors %}
+                <li>{{ e }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="row">
+        <div class="col">
+          <h2>{{ package }} <small class="muted">({{ ecosystem }})</small></h2>
+          {% if version %}
+            <p class="muted">Version: {{ version }}</p>
+          {% endif %}
+        </div>
+        <div class="col verdict-col">
+          {% set vclass = 'badge-unknown' %}
+          {% if verdict == 'Safe' %}{% set vclass = 'badge-safe' %}{% elif verdict == 'Needs review' %}{% set vclass = 'badge-warning' %}{% elif verdict == 'Unsafe' %}{% set vclass = 'badge-danger' %}{% endif %}
+          <div class="verdict">
+            <div class="verdict-label {{ vclass }}">{{ verdict }}</div>
+          </div>
+        </div>
+      </div>
+
+      {% if reasons %}
+        <div class="section">
+          <h3>Reasons</h3>
+          <ul class="reasons">
+            {% for r in reasons %}
+              <li>{{ r }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="section">
+        <h3>Package metadata</h3>
+        <table class="meta-table">
+          <tr><th>Name</th><td>{{ meta.name or '—' }}</td></tr>
+          <tr><th>Version</th><td>{{ meta.version or '—' }}</td></tr>
+          <tr><th>License</th><td>{{ meta.license or '—' }}</td></tr>
+          <tr><th>Summary</th><td>{{ meta.summary or '—' }}</td></tr>
+          <tr><th>Home</th><td>{% if meta.home_page %}<a href="{{ meta.home_page }}" target="_blank">{{ meta.home_page }}</a>{% else %}—{% endif %}</td></tr>
+          <tr><th>Latest release</th><td>{{ meta.latest_release_date or '—' }}</td></tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3>Vulnerabilities</h3>
+        {% if vulns %}
+          <ul class="vuln-list">
+            {% for v in vulns %}
+              <li>
+                <strong>{{ v.id or 'ID' }}</strong>
+                {% if v.get('severity') %}
+                  — <span class="muted">{{ v.severity }}</span>
+                {% endif %}
+                <pre class="vuln-details">{{ v }}</pre>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted">No known vulnerabilities found.</p>
+        {% endif %}
+      </div>
+
+      <p class="back"><a class="link" href="/">← Back</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">© Library Safety Checker</div>
+  </footer>
+</body>
+</html>
