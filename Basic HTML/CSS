@@ -1,0 +1,29 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Library Safety Checker</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Open Source Library Safety Checker</h1>
+    <form action="/search" method="post" class="search-form">
+      <label>Package name</label>
+      <input type="text" name="package" placeholder="e.g., requests" required>
+      <label>Ecosystem</label>
+      <select name="ecosystem">
+        <option>PyPI</option>
+        <option>npm</option>
+        <option>Maven</option>
+        <option>Go</option>
+        <option>RubyGems</option>
+      </select>
+      <label>Version (optional)</label>
+      <input type="text" name="version" placeholder="e.g., 2.31.0">
+      <button type="submit">Check safety</button>
+    </form>
+  </div>
+</body>
+</html>
